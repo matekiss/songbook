@@ -4,6 +4,8 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
+import cc.mkiss.songbook.ui.login.LoginPresenter;
+import cc.mkiss.songbook.ui.login.LoginScreen;
 import cc.mkiss.songbook.ui.main.MainPresenter;
 import dagger.Module;
 import dagger.Provides;
@@ -25,5 +27,11 @@ public class UIModule {
     @Singleton
     public MainPresenter provideMainPresenter() {
         return new MainPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public LoginPresenter provideLoginPresenter() {
+        return new LoginPresenter();
     }
 }

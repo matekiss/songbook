@@ -3,6 +3,7 @@ package cc.mkiss.songbook;
 import javax.inject.Singleton;
 
 import cc.mkiss.songbook.ui.UIModule;
+import cc.mkiss.songbook.ui.login.LoginActivity;
 import cc.mkiss.songbook.ui.main.MainActivity;
 import dagger.Component;
 
@@ -10,4 +11,6 @@ import dagger.Component;
 @Component(modules = {UIModule.class})
 public interface SongbookApplicationComponent {
     void inject(MainActivity mainActivity);
+
+    void inject(LoginActivity loginActivity);
 }
