@@ -37,3 +37,11 @@ before_script:
   - adb shell input keyevent 82 &
 
 script: ./gradlew :app:build
+
+branches:
+  only:
+  - master
+  - develop
+
+notifications:
+  email: false
