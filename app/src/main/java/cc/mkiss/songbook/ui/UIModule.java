@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 import cc.mkiss.songbook.ui.login.LoginPresenter;
 import cc.mkiss.songbook.ui.login.LoginScreen;
 import cc.mkiss.songbook.ui.main.MainPresenter;
+import cc.mkiss.songbook.ui.songs.SongsPresenter;
 import dagger.Module;
 import dagger.Provides;
 
@@ -33,5 +34,11 @@ public class UIModule {
     @Singleton
     public LoginPresenter provideLoginPresenter() {
         return new LoginPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public SongsPresenter provideSongsPresenter() {
+        return new SongsPresenter();
     }
 }
