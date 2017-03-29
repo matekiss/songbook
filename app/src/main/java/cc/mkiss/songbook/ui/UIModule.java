@@ -8,6 +8,7 @@ import cc.mkiss.songbook.ui.favorites.FavoritesPresenter;
 import cc.mkiss.songbook.ui.login.LoginPresenter;
 import cc.mkiss.songbook.ui.login.LoginScreen;
 import cc.mkiss.songbook.ui.main.MainPresenter;
+import cc.mkiss.songbook.ui.song.SongPresenter;
 import cc.mkiss.songbook.ui.songs.SongsPresenter;
 import dagger.Module;
 import dagger.Provides;
@@ -45,5 +46,11 @@ public class UIModule {
 
     public FavoritesPresenter provideFavoritesPresenter() {
         return new FavoritesPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public SongPresenter provideSongPresenter() {
+        return new SongPresenter();
     }
 }

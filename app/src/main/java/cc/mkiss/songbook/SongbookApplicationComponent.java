@@ -6,6 +6,7 @@ import cc.mkiss.songbook.ui.UIModule;
 import cc.mkiss.songbook.ui.favorites.FavoritesActivity;
 import cc.mkiss.songbook.ui.login.LoginActivity;
 import cc.mkiss.songbook.ui.main.MainActivity;
+import cc.mkiss.songbook.ui.song.SongActivity;
 import cc.mkiss.songbook.ui.songs.SongsActivity;
 import dagger.Component;
 
@@ -19,4 +20,6 @@ public interface SongbookApplicationComponent {
     void inject(SongsActivity songsActivity);
 
     void inject(FavoritesActivity favoritesActivity);
+
+    void inject(SongActivity songActivity);
 }
