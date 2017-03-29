@@ -4,6 +4,7 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
+import cc.mkiss.songbook.ui.favorites.FavoritesPresenter;
 import cc.mkiss.songbook.ui.login.LoginPresenter;
 import cc.mkiss.songbook.ui.login.LoginScreen;
 import cc.mkiss.songbook.ui.main.MainPresenter;
@@ -40,5 +41,9 @@ public class UIModule {
     @Singleton
     public SongsPresenter provideSongsPresenter() {
         return new SongsPresenter();
+    }
+
+    public FavoritesPresenter provideFavoritesPresenter() {
+        return new FavoritesPresenter();
     }
 }
