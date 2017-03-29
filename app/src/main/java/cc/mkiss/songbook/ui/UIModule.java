@@ -44,6 +44,8 @@ public class UIModule {
         return new SongsPresenter();
     }
 
+    @Provides
+    @Singleton
     public FavoritesPresenter provideFavoritesPresenter() {
         return new FavoritesPresenter();
     }
