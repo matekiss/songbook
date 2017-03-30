@@ -6,6 +6,7 @@ import android.os.Bundle;
 import java.util.List;
 
 import cc.mkiss.songbook.R;
+import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.model.Song;
 
 public class FavoritesActivity extends AppCompatActivity implements FavoritesScreen {
@@ -14,6 +15,8 @@ public class FavoritesActivity extends AppCompatActivity implements FavoritesScr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
+
+        SongbookApplication.injector.inject(this);
     }
 
     @Override

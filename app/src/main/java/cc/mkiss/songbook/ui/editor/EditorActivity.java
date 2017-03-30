@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import cc.mkiss.songbook.R;
+import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.model.Song;
 
 public class EditorActivity extends AppCompatActivity implements EditorScreen {
@@ -12,6 +13,8 @@ public class EditorActivity extends AppCompatActivity implements EditorScreen {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
+
+        SongbookApplication.injector.inject(this);
     }
 
     @Override
