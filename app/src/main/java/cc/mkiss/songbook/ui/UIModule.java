@@ -4,6 +4,7 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
+import cc.mkiss.songbook.ui.editor.EditorPresenter;
 import cc.mkiss.songbook.ui.favorites.FavoritesPresenter;
 import cc.mkiss.songbook.ui.login.LoginPresenter;
 import cc.mkiss.songbook.ui.login.LoginScreen;
@@ -54,5 +55,11 @@ public class UIModule {
     @Singleton
     public SongPresenter provideSongPresenter() {
         return new SongPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public EditorPresenter provideEditorPresenter() {
+        return new EditorPresenter();
     }
 }
