@@ -2,6 +2,7 @@ package cc.mkiss.songbook;
 
 import javax.inject.Singleton;
 
+import cc.mkiss.songbook.repository.RepositoryModule;
 import cc.mkiss.songbook.ui.UIModule;
 import cc.mkiss.songbook.ui.editor.EditorActivity;
 import cc.mkiss.songbook.ui.favorites.FavoritesActivity;
@@ -12,8 +13,10 @@ import cc.mkiss.songbook.ui.songs.SongsActivity;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {UIModule.class})
+@Component(modules = {RepositoryModule.class, UIModule.class})
 public interface SongbookApplicationComponent {
+    void inject(SongbookApplication songbookApplication);
+
     void inject(MainActivity mainActivity);
 
     void inject(LoginActivity loginActivity);

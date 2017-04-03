@@ -1,17 +1,11 @@
 package cc.mkiss.songbook.model;
 
-public class Song {
-    private Long id;
+import com.orm.SugarRecord;
+
+public class Song extends SugarRecord {
     private String title;
     private String lyrics;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private boolean favorite;
 
     public String getTitle() {
         return title;
@@ -27,5 +21,13 @@ public class Song {
 
     public void setLyrics(String lyrics) {
         this.lyrics = lyrics;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }
