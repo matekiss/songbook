@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import cc.mkiss.songbook.model.Song;
 
@@ -50,8 +51,15 @@ public class MemoryRepository implements Repository {
     }
 
     @Override
-    public List<Song> getSongs() {
-        return new ArrayList<>(songs.values());
+    public List<Song> getSongs(String keyword) {
+        List<Song> songList = new ArrayList<>();
+        for (Song song : songs.values()) {
+            if (song.getTitle().contains(keyword)) {
+                songList.add(song);
+            }
+        }
+
+        return songList;
     }
 
     @Override
@@ -89,10 +97,10 @@ public class MemoryRepository implements Repository {
     }
 
     @Override
-    public List<Song> getFavorites() {
+    public List<Song> getFavorites(String keyword) {
         List<Song> favorites = new ArrayList<>();
         for (Song song : songs.values()) {
-            if (song.isFavorite()) {
+            if (song.isFavorite() && song.getTitle().contains(keyword)) {
                 favorites.add(song);
             }
         }

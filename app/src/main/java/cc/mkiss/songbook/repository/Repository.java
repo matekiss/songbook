@@ -12,7 +12,7 @@ public interface Repository {
     void close();
 
     // Song
-    List<Song> getSongs();
+    List<Song> getSongs(String keyword);
 
     Song addSong(Song song);
 
@@ -23,7 +23,7 @@ public interface Repository {
     void removeSong(Song song);
 
     // Favorite
-    List<Song> getFavorites();
+    List<Song> getFavorites(String keyword);
 
     void addFavorite(Song song);
 

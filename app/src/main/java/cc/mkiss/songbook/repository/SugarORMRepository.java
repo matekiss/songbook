@@ -21,8 +21,8 @@ public class SugarORMRepository implements Repository {
     }
 
     @Override
-    public List<Song> getSongs() {
-        return SugarRecord.listAll(Song.class);
+    public List<Song> getSongs(String keyword) {
+        return SugarRecord.find(Song.class, "title LIKE ?", "%" + keyword + "%");
     }
 
     @Override
@@ -54,8 +54,8 @@ public class SugarORMRepository implements Repository {
     }
 
     @Override
-    public List<Song> getFavorites() {
-        return SugarRecord.find(Song.class, "favorite = ?", Boolean.toString(true));
+    public List<Song> getFavorites(String keyword) {
+        return SugarRecord.find(Song.class, "favorite = ? and title LIKE ?", Boolean.toString(true), "%" + keyword + "%");
     }
 
     @Override
