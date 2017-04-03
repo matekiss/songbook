@@ -7,6 +7,12 @@ public class Song extends SugarRecord {
     private String lyrics;
     private boolean favorite;
 
+    public Song() {
+        this.title = "";
+        this.lyrics = "";
+        this.favorite = false;
+    }
+
     public String getTitle() {
         return title;
     }
