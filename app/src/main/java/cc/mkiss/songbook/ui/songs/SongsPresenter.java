@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import cc.mkiss.songbook.interactor.songs.SongsInteractor;
 import cc.mkiss.songbook.interactor.songs.events.AddFavoriteEvent;
+import cc.mkiss.songbook.interactor.songs.events.AddSongEvent;
 import cc.mkiss.songbook.interactor.songs.events.GetSongsEvent;
 import cc.mkiss.songbook.interactor.songs.events.RemoveFavoriteEvent;
 import cc.mkiss.songbook.model.Song;
@@ -64,6 +65,15 @@ public class SongsPresenter extends Presenter<SongsScreen> {
         });
     }
 
+    public void addSong() {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                interactor.addSong();
+            }
+        });
+    }
+
     public void onEventMainThread(GetSongsEvent event) {
         if (screen == null) {
             return;
@@ -78,5 +88,13 @@ public class SongsPresenter extends Presenter<SongsScreen> {
 
     public void onEventMainThread(RemoveFavoriteEvent event) {
 
+    }
+
+    public void onEventMainThread(AddSongEvent event) {
+        if (screen == null) {
+            return;
+        }
+
+        screen.showSong(event.getSong().getId());
     }
 }

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.interactor.songs.events.AddFavoriteEvent;
+import cc.mkiss.songbook.interactor.songs.events.AddSongEvent;
 import cc.mkiss.songbook.interactor.songs.events.GetSongsEvent;
 import cc.mkiss.songbook.interactor.songs.events.RemoveFavoriteEvent;
 import cc.mkiss.songbook.model.Song;
@@ -59,6 +60,18 @@ public class SongsInteractor {
         RemoveFavoriteEvent event = new RemoveFavoriteEvent();
         try {
             repository.removeFavorite(song);
+            event.setSong(song);
+        } catch (Exception e) {
+            event.setThrowable(e);
+        }
+
+        eventBus.post(event);
+    }
+
+    public void addSong() {
+        AddSongEvent event = new AddSongEvent();
+        try {
+            Song song = repository.addSong(new Song());
             event.setSong(song);
         } catch (Exception e) {
             event.setThrowable(e);
