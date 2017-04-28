@@ -9,6 +9,7 @@ import cc.mkiss.songbook.repository.RepositoryModule;
 import cc.mkiss.songbook.ui.UIModule;
 import cc.mkiss.songbook.ui.editor.EditorActivity;
 import cc.mkiss.songbook.ui.favorites.FavoritesActivity;
+import cc.mkiss.songbook.ui.favorites.FavoritesPresenter;
 import cc.mkiss.songbook.ui.login.LoginActivity;
 import cc.mkiss.songbook.ui.main.MainActivity;
 import cc.mkiss.songbook.ui.song.SongActivity;
@@ -31,6 +32,8 @@ public interface SongbookApplicationComponent {
     void inject(SongsPresenter songsPresenter);
 
     void inject(FavoritesActivity favoritesActivity);
+
+    void inject(FavoritesPresenter favoritesPresenter);
 
     void inject(SongActivity songActivity);
 
