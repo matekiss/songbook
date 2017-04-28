@@ -60,6 +60,10 @@ public class SongsInteractor {
         eventBus.post(event);
     }
 
+    public void getFavorites() {
+        getFavorites(null);
+    }
+
     public void getFavorites(String keyword) {
         if (keyword == null) {
             keyword = "";
