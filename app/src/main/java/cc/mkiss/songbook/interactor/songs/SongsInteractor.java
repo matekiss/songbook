@@ -10,6 +10,7 @@ import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.interactor.songs.events.AddFavoriteEvent;
 import cc.mkiss.songbook.interactor.songs.events.AddSongEvent;
 import cc.mkiss.songbook.interactor.songs.events.GetFavoritesEvent;
+import cc.mkiss.songbook.interactor.songs.events.GetSongEvent;
 import cc.mkiss.songbook.interactor.songs.events.GetSongsEvent;
 import cc.mkiss.songbook.interactor.songs.events.RemoveFavoriteEvent;
 import cc.mkiss.songbook.interactor.songs.events.RemoveSongEvent;
@@ -40,6 +41,18 @@ public class SongsInteractor {
         try {
             List<Song> songs = repository.getSongs(keyword);
             event.setSongs(songs);
+        } catch (Exception e) {
+            event.setThrowable(e);
+        }
+
+        eventBus.post(event);
+    }
+
+    public void getSong(Long id) {
+        GetSongEvent event = new GetSongEvent();
+        try {
+            Song song = repository.getSong(id);
+            event.setSong(song);
         } catch (Exception e) {
             event.setThrowable(e);
         }
