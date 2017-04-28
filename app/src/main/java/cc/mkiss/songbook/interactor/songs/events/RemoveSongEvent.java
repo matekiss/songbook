@@ -1,4 +1,4 @@
 package cc.mkiss.songbook.interactor.songs.events;
 
-public class AddSongEvent extends SongEvent {
+public class RemoveSongEvent extends SongEvent {
 }

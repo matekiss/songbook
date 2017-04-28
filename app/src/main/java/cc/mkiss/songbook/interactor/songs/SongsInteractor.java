@@ -9,8 +9,11 @@ import javax.inject.Inject;
 import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.interactor.songs.events.AddFavoriteEvent;
 import cc.mkiss.songbook.interactor.songs.events.AddSongEvent;
+import cc.mkiss.songbook.interactor.songs.events.GetFavoritesEvent;
 import cc.mkiss.songbook.interactor.songs.events.GetSongsEvent;
 import cc.mkiss.songbook.interactor.songs.events.RemoveFavoriteEvent;
+import cc.mkiss.songbook.interactor.songs.events.RemoveSongEvent;
+import cc.mkiss.songbook.interactor.songs.events.UpdateSongEvent;
 import cc.mkiss.songbook.model.Song;
 import cc.mkiss.songbook.repository.Repository;
 
@@ -36,6 +39,22 @@ public class SongsInteractor {
         GetSongsEvent event = new GetSongsEvent();
         try {
             List<Song> songs = repository.getSongs(keyword);
+            event.setSongs(songs);
+        } catch (Exception e) {
+            event.setThrowable(e);
+        }
+
+        eventBus.post(event);
+    }
+
+    public void getFavorites(String keyword) {
+        if (keyword == null) {
+            keyword = "";
+        }
+
+        GetFavoritesEvent event = new GetFavoritesEvent();
+        try {
+            List<Song> songs = repository.getFavorites(keyword);
             event.setSongs(songs);
         } catch (Exception e) {
             event.setThrowable(e);
@@ -72,6 +91,30 @@ public class SongsInteractor {
         AddSongEvent event = new AddSongEvent();
         try {
             Song song = repository.addSong(new Song());
+            event.setSong(song);
+        } catch (Exception e) {
+            event.setThrowable(e);
+        }
+
+        eventBus.post(event);
+    }
+
+    public void removeSong(Song song) {
+        RemoveSongEvent event = new RemoveSongEvent();
+        try {
+            repository.removeSong(song);
+            event.setSong(song);
+        } catch (Exception e) {
+            event.setThrowable(e);
+        }
+
+        eventBus.post(event);
+    }
+
+    public void updateSong(Song song) {
+        UpdateSongEvent event = new UpdateSongEvent();
+        try {
+            repository.updateSong(song);
             event.setSong(song);
         } catch (Exception e) {
             event.setThrowable(e);
