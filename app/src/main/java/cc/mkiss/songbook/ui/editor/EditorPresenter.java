@@ -7,4 +7,8 @@ public class EditorPresenter extends Presenter<EditorScreen> {
     public void saveSong(Song song) {
 
     }
+
+    public void deleteSong(Song song) {
+
+    }
 }
