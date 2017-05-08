@@ -1,16 +1,34 @@
 package cc.mkiss.songbook.model;
 
-import com.orm.SugarRecord;
+import com.orm.dsl.Table;
 
-public class Song extends SugarRecord {
+@Table
+public class Song {
+    private Long id;
     private String title;
     private String lyrics;
     private boolean favorite;
 
     public Song() {
+        this.id = null;
         this.title = "";
         this.lyrics = "";
         this.favorite = false;
+    }
+
+    public Song(Long id, String title, String lyrics, boolean favorite) {
+        this.id = id;
+        this.title = title;
+        this.lyrics = lyrics;
+        this.favorite = favorite;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
