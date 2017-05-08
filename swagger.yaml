@@ -23,7 +23,7 @@ paths:
           schema:
             type: array
             items:
-              - $ref: '#/definitions/Song'
+              $ref: '#/definitions/Song'
       security:
         - token: []
     post:
