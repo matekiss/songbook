@@ -2,6 +2,7 @@ package cc.mkiss.songbook.interactor.songs;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import cc.mkiss.songbook.interactor.songs.events.RemoveFavoriteEvent;
 import cc.mkiss.songbook.interactor.songs.events.RemoveSongEvent;
 import cc.mkiss.songbook.interactor.songs.events.UpdateSongEvent;
 import cc.mkiss.songbook.model.Song;
+import cc.mkiss.songbook.network.api.SongApi;
 import cc.mkiss.songbook.repository.Repository;
 
 public class SongsInteractor {
@@ -23,6 +25,9 @@ public class SongsInteractor {
     Repository repository;
     @Inject
     EventBus eventBus;
+
+    @Inject
+    SongApi songApi;
 
     public SongsInteractor() {
         SongbookApplication.injector.inject(this);
@@ -84,6 +89,7 @@ public class SongsInteractor {
         AddFavoriteEvent event = new AddFavoriteEvent();
         try {
             repository.addFavorite(song);
+            updateRemoteSongFromRepository(song);
             event.setSong(song);
         } catch (Exception e) {
             event.setThrowable(e);
@@ -96,6 +102,7 @@ public class SongsInteractor {
         RemoveFavoriteEvent event = new RemoveFavoriteEvent();
         try {
             repository.removeFavorite(song);
+            updateRemoteSongFromRepository(song);
             event.setSong(song);
         } catch (Exception e) {
             event.setThrowable(e);
@@ -108,6 +115,7 @@ public class SongsInteractor {
         AddSongEvent event = new AddSongEvent();
         try {
             Song song = repository.addSong(new Song());
+            addRemoteSongFromRepository(song);
             event.setSong(song);
         } catch (Exception e) {
             event.setThrowable(e);
@@ -120,6 +128,7 @@ public class SongsInteractor {
         RemoveSongEvent event = new RemoveSongEvent();
         try {
             repository.removeSong(song);
+            deleteRemoteSong(song);
             event.setSong(song);
         } catch (Exception e) {
             event.setThrowable(e);
@@ -132,11 +141,26 @@ public class SongsInteractor {
         UpdateSongEvent event = new UpdateSongEvent();
         try {
             repository.updateSong(song);
+            updateRemoteSongFromRepository(song);
             event.setSong(song);
         } catch (Exception e) {
             event.setThrowable(e);
         }
 
         eventBus.post(event);
+    }
+
+    private void addRemoteSongFromRepository(Song song) throws IOException {
+        song = repository.getSong(song.getId());
+        songApi.addSong(song);
+    }
+
+    private void updateRemoteSongFromRepository(Song song) throws IOException {
+        song = repository.getSong(song.getId());
+        songApi.updateSong(song).execute();
+    }
+
+    private void deleteRemoteSong(Song song) throws IOException {
+        songApi.deleteSong(song.getId()).execute();
     }
 }
