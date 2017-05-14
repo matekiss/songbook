@@ -1,6 +1,8 @@
 package cc.mkiss.songbook.ui.favorites;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.Executor;
 
@@ -55,6 +57,7 @@ public class FavoritesPresenter extends Presenter<FavoritesScreen> {
         });
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(GetFavoritesEvent event) {
         if (screen == null) {
             return;

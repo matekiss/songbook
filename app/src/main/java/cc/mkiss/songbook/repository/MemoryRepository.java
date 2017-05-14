@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 
 import cc.mkiss.songbook.model.Song;
 
@@ -41,7 +40,7 @@ public class MemoryRepository implements Repository {
         song3.setId(getNextSongId());
         song3.setTitle("Example song 3");
         song3.setLyrics("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus molestie felis luctus pellentesque varius. Phasellus elit justo, tempus laoreet aliquet ac, imperdiet tristique libero. Sed eu urna sed ligula tempor malesuada at eu tortor. Curabitur posuere sapien sed vestibulum volutpat. Curabitur tempor, est nec mollis venenatis, felis sem sagittis est, a sodales mi est sit amet urna. Integer dolor velit, molestie non lacinia in, aliquet quis metus. Pellentesque aliquet porttitor porttitor.");
-        song3.setFavorite(false);
+        song3.setFavorite(true);
         songs.put(song3.getId(), song3);
     }
 

@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import cc.mkiss.songbook.R;
 import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.model.Song;
+import cc.mkiss.songbook.ui.favorites.FavoritesFragment;
 import cc.mkiss.songbook.ui.songs.OnSongListFragmentInteractionListener;
 import cc.mkiss.songbook.ui.songs.SongsFragment;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     @Inject
     MainPresenter mainPresenter;
 
+    private Fragment currentFragment;
     private FloatingActionButton fab;
     private SearchView searchView;
 
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.content_frame, firstFragment).commit();
+            currentFragment = firstFragment;
             setTitle(R.string.fragment_songs);
         }
     }
@@ -120,7 +123,7 @@ public class MainActivity extends AppCompatActivity
 
         searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
 
-        setActiveFragmentAsSearchViewOnQueryTextListener();
+        setCurrentFragmentAsSearchViewOnQueryTextListener();
 
         return true;
     }
@@ -146,6 +149,7 @@ public class MainActivity extends AppCompatActivity
             fragment = SongsFragment.newInstance();
             setTitle(R.string.fragment_songs);
         } else if (id == R.id.nav_favorites) {
+            fragment = FavoritesFragment.newInstance();
             setTitle(R.string.fragment_favorites);
         } else if (id == R.id.nav_logout) {
 
@@ -156,7 +160,8 @@ public class MainActivity extends AppCompatActivity
                     .beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
-            setActiveFragmentAsSearchViewOnQueryTextListener();
+            currentFragment = fragment;
+            setCurrentFragmentAsSearchViewOnQueryTextListener();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -169,12 +174,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void setActiveFragmentAsSearchViewOnQueryTextListener() {
+    private void setCurrentFragmentAsSearchViewOnQueryTextListener() {
         searchView.setOnQueryTextListener(null);
 
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);
-        if (fragment instanceof SearchView.OnQueryTextListener) {
-            searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) fragment);
+        if (currentFragment instanceof SearchView.OnQueryTextListener) {
+            searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) currentFragment);
         }
     }
 }
