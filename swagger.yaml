@@ -132,7 +132,7 @@ paths:
       security:
         - token: []
   /user/login:
-    get:
+    post:
       tags:
         - user
       summary: Logs user into the system
