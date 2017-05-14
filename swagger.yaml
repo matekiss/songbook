@@ -102,6 +102,8 @@ paths:
           schema:
             $ref: '#/definitions/Song'
       responses:
+        '200':
+          description: Song updated
         '400':
           description: Invalid ID supplied
         '404':
