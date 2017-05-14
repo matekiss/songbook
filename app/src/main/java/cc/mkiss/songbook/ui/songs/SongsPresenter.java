@@ -1,6 +1,8 @@
 package cc.mkiss.songbook.ui.songs;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.Executor;
 
@@ -74,6 +76,7 @@ public class SongsPresenter extends Presenter<SongsScreen> {
         });
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(GetSongsEvent event) {
         if (screen == null) {
             return;
@@ -82,19 +85,12 @@ public class SongsPresenter extends Presenter<SongsScreen> {
         screen.showSongs(event.getSongs());
     }
 
-    public void onEventMainThread(AddFavoriteEvent event) {
-
-    }
-
-    public void onEventMainThread(RemoveFavoriteEvent event) {
-
-    }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(AddSongEvent event) {
         if (screen == null) {
             return;
         }
 
-        screen.showSong(event.getSong().getId());
+        screen.showSong(event.getSong());
     }
 }

@@ -3,6 +3,8 @@ package cc.mkiss.songbook.interactor.songs;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +21,7 @@ import cc.mkiss.songbook.interactor.songs.events.UpdateSongEvent;
 import cc.mkiss.songbook.model.Song;
 import cc.mkiss.songbook.network.api.SongApi;
 import cc.mkiss.songbook.repository.Repository;
+import cc.mkiss.songbook.utils.SongTitleComparator;
 
 public class SongsInteractor {
     @Inject
@@ -45,6 +48,7 @@ public class SongsInteractor {
         GetSongsEvent event = new GetSongsEvent();
         try {
             List<Song> songs = repository.getSongs(keyword);
+            Collections.sort(songs, SongTitleComparator.getInstance());
             event.setSongs(songs);
         } catch (Exception e) {
             event.setThrowable(e);
@@ -77,6 +81,7 @@ public class SongsInteractor {
         GetFavoritesEvent event = new GetFavoritesEvent();
         try {
             List<Song> songs = repository.getFavorites(keyword);
+            Collections.sort(songs, SongTitleComparator.getInstance());
             event.setSongs(songs);
         } catch (Exception e) {
             event.setThrowable(e);

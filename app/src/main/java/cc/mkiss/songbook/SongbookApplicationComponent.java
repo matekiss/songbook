@@ -6,7 +6,6 @@ import cc.mkiss.songbook.interactor.InteractorModule;
 import cc.mkiss.songbook.interactor.authentication.AuthenticationInteractor;
 import cc.mkiss.songbook.interactor.songs.SongsInteractor;
 import cc.mkiss.songbook.mock.MockNetworkModule;
-import cc.mkiss.songbook.network.NetworkModule;
 import cc.mkiss.songbook.repository.RepositoryModule;
 import cc.mkiss.songbook.ui.UIModule;
 import cc.mkiss.songbook.ui.editor.EditorActivity;
@@ -18,7 +17,7 @@ import cc.mkiss.songbook.ui.login.LoginPresenter;
 import cc.mkiss.songbook.ui.main.MainActivity;
 import cc.mkiss.songbook.ui.song.SongActivity;
 import cc.mkiss.songbook.ui.song.SongPresenter;
-import cc.mkiss.songbook.ui.songs.SongsActivity;
+import cc.mkiss.songbook.ui.songs.SongsFragment;
 import cc.mkiss.songbook.ui.songs.SongsPresenter;
 import dagger.Component;
 
@@ -33,7 +32,7 @@ public interface SongbookApplicationComponent {
 
     void inject(LoginPresenter loginPresenter);
 
-    void inject(SongsActivity songsActivity);
+    void inject(SongsFragment songsFragment);
 
     void inject(SongsPresenter songsPresenter);
 

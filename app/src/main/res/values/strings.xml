@@ -8,4 +8,5 @@
     <string name="action_settings">Settings</string>
     <string name="fragment_songs">Songs</string>
     <string name="fragment_favorites">Favorite songs</string>
+    <string name="action_search">Search</string>
 </resources>

@@ -7,5 +7,5 @@ import cc.mkiss.songbook.model.Song;
 public interface SongsScreen {
     void showSongs(List<Song> songs);
 
-    void showSong(Long id);
+    void showSong(Song song);
 }
