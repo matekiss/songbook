@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import cc.mkiss.songbook.interactor.InteractorModule;
 import cc.mkiss.songbook.interactor.authentication.AuthenticationInteractor;
 import cc.mkiss.songbook.interactor.songs.SongsInteractor;
+import cc.mkiss.songbook.mock.MockNetworkModule;
 import cc.mkiss.songbook.network.NetworkModule;
 import cc.mkiss.songbook.repository.RepositoryModule;
 import cc.mkiss.songbook.ui.UIModule;
@@ -22,7 +23,7 @@ import cc.mkiss.songbook.ui.songs.SongsPresenter;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {InteractorModule.class, NetworkModule.class, RepositoryModule.class, UIModule.class})
+@Component(modules = {InteractorModule.class, MockNetworkModule.class, RepositoryModule.class, UIModule.class})
 public interface SongbookApplicationComponent {
     void inject(SongbookApplication songbookApplication);
 
