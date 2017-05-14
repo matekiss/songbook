@@ -1,5 +1,6 @@
 package cc.mkiss.songbook.network.api;
 
+import cc.mkiss.songbook.model.Credentials;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -8,14 +9,13 @@ public interface UserApi {
   /**
    * Logs user into the system
    * 
-   * @param username The user name for login
-   * @param password The password for login in clear text
+   * @param body Credentials for login
    * @return Call<String>
    */
   
-  @GET("user/login")
+  @POST("user/login")
   Call<String> loginUser(
-          @Query("username") String username, @Query("password") String password
+          @Body Credentials body
   );
 
   
