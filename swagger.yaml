@@ -147,12 +147,12 @@ paths:
         - application/xml
       parameters:
         - name: username
-          in: query
+          in: body
           description: The user name for login
           required: true
           type: string
         - name: password
-          in: query
+          in: body
           description: The password for login in clear text
           required: true
           type: string
