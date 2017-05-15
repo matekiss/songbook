@@ -36,7 +36,7 @@ public class AuthenticationInteractor {
         Credentials credentials = new Credentials(username, password);
         String token = null;
         try {
-            token = userApi.loginUser(credentials).execute().body();
+            token = userApi.loginUser(credentials).execute().body().getToken();
             populateRepository();
         } catch (Exception e) {
             event.setThrowable(e);

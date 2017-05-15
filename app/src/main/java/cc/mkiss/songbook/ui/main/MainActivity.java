@@ -23,9 +23,11 @@ import cc.mkiss.songbook.R;
 import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.model.Song;
 import cc.mkiss.songbook.ui.favorites.FavoritesFragment;
+import cc.mkiss.songbook.ui.login.LoginActivity;
 import cc.mkiss.songbook.ui.song.SongActivity;
 import cc.mkiss.songbook.ui.songs.OnSongListFragmentInteractionListener;
 import cc.mkiss.songbook.ui.songs.SongsFragment;
+import cc.mkiss.songbook.utils.TokenManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -99,6 +101,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (TokenManager.getInstance().getToken() == null) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         mainPresenter.detachScreen();
@@ -153,7 +165,9 @@ public class MainActivity extends AppCompatActivity
                 fragment = FavoritesFragment.newInstance();
                 setTitle(R.string.fragment_favorites);
             } else if (id == R.id.nav_logout) {
-
+                TokenManager.getInstance().setToken(null);
+                finish();
+                return true;
             }
 
             if (fragment != null) {

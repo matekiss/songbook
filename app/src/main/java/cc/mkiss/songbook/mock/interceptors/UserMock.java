@@ -2,7 +2,9 @@ package cc.mkiss.songbook.mock.interceptors;
 
 import android.net.Uri;
 
+import cc.mkiss.songbook.model.Token;
 import cc.mkiss.songbook.network.NetworkConfig;
+import cc.mkiss.songbook.utils.GsonHelper;
 import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -19,7 +21,7 @@ public class UserMock {
 
         if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + "user/login")
                 && request.method().equals("POST")) {
-            responseString = "secret";
+            responseString = GsonHelper.getGson().toJson(new Token("secret"));
             responseCode = 200;
         } else if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + "user/logout")
                 && request.method().equals("GET")) {
