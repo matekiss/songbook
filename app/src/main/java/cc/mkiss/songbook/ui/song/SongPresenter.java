@@ -48,7 +48,11 @@ public class SongPresenter extends Presenter<SongScreen> {
     }
 
     public void handleEdit(Song song) {
+        if (screen == null) {
+            return;
+        }
 
+        screen.editSong(song);
     }
 
     public void handleStar(Song song, boolean isChecked) {

@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import cc.mkiss.songbook.R;
 import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.model.Song;
+import cc.mkiss.songbook.ui.editor.EditorActivity;
 
 public class SongActivity
         extends AppCompatActivity
@@ -73,6 +74,7 @@ public class SongActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
+                songPresenter.handleEdit(song);
                 return true;
             case R.id.action_delete:
                 songPresenter.handleDelete(song);
@@ -107,6 +109,8 @@ public class SongActivity
 
     @Override
     public void editSong(Song song) {
-
+        Intent intent = new Intent(this, EditorActivity.class);
+        intent.putExtra(EditorActivity.EXTRA_SONG_ID, song.getId());
+        startActivity(intent);
     }
 }
