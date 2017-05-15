@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                mainPresenter.handleAdd();
             }
         });
 
@@ -103,11 +102,6 @@ public class MainActivity extends AppCompatActivity
     protected void onStop() {
         super.onStop();
         mainPresenter.detachScreen();
-    }
-
-    @Override
-    public void showMessage(String text) {
-        Snackbar.make(getCurrentFocus(), text, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -179,6 +173,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSongListFragmentInteraction(Song song) {
+        showSong(song);
+    }
+
+    @Override
+    public void showSong(Song song) {
         Intent intent = new Intent(this, SongActivity.class);
         intent.putExtra(SongActivity.EXTRA_SONG_ID, song.getId());
         startActivity(intent);

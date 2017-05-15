@@ -1,5 +1,7 @@
 package cc.mkiss.songbook.ui.main;
 
+import cc.mkiss.songbook.model.Song;
+
 public interface MainScreen {
-    void showMessage(String text);
+    void showSong(Song song);
 }

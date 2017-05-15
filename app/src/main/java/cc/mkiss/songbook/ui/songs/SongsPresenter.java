@@ -60,15 +60,6 @@ public class SongsPresenter extends Presenter<SongsScreen> {
         });
     }
 
-    public void addSong() {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                interactor.addSong();
-            }
-        });
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(GetSongsEvent event) {
         if (screen == null) {
@@ -76,14 +67,5 @@ public class SongsPresenter extends Presenter<SongsScreen> {
         }
 
         screen.showSongs(event.getSongs());
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(AddSongEvent event) {
-        if (screen == null) {
-            return;
-        }
-
-        screen.showSong(event.getSong());
     }
 }
