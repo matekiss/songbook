@@ -67,6 +67,11 @@ public class SongsFragment
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        songsPresenter.searchSong(null);
+    }
 
     @Override
     public void onAttach(Context context) {

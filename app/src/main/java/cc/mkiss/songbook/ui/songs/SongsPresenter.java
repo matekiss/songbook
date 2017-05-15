@@ -31,13 +31,6 @@ public class SongsPresenter extends Presenter<SongsScreen> {
         super.attachScreen(screen);
         injector.inject(this);
         eventBus.register(this);
-
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                interactor.getSongs();
-            }
-        });
     }
 
     @Override

@@ -68,6 +68,11 @@ public class FavoritesFragment
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        favoritesPresenter.searchSong(null);
+    }
 
     @Override
     public void onAttach(Context context) {

@@ -6,4 +6,6 @@ public interface SongScreen {
     void showSong(Song song);
 
     void editSong(Song song);
+
+    void finish();
 }

@@ -29,13 +29,6 @@ public class FavoritesPresenter extends Presenter<FavoritesScreen> {
         super.attachScreen(screen);
         injector.inject(this);
         eventBus.register(this);
-
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                interactor.getFavorites();
-            }
-        });
     }
 
     @Override

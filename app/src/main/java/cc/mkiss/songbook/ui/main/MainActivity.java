@@ -1,5 +1,6 @@
 package cc.mkiss.songbook.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -22,6 +23,7 @@ import cc.mkiss.songbook.R;
 import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.model.Song;
 import cc.mkiss.songbook.ui.favorites.FavoritesFragment;
+import cc.mkiss.songbook.ui.song.SongActivity;
 import cc.mkiss.songbook.ui.songs.OnSongListFragmentInteractionListener;
 import cc.mkiss.songbook.ui.songs.SongsFragment;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     MainPresenter mainPresenter;
 
     private Fragment currentFragment;
+    private int selectedNavigationItemId;
     private FloatingActionButton fab;
     private SearchView searchView;
 
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_songs);
+        selectedNavigationItemId = R.id.nav_songs;
 
         SongbookApplication.injector.inject(this);
 
@@ -144,24 +148,28 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Fragment fragment = null;
-        if (id == R.id.nav_songs) {
-            fragment = SongsFragment.newInstance();
-            setTitle(R.string.fragment_songs);
-        } else if (id == R.id.nav_favorites) {
-            fragment = FavoritesFragment.newInstance();
-            setTitle(R.string.fragment_favorites);
-        } else if (id == R.id.nav_logout) {
+        if (id != selectedNavigationItemId) {
+            selectedNavigationItemId = id;
 
-        }
+            Fragment fragment = null;
+            if (id == R.id.nav_songs) {
+                fragment = SongsFragment.newInstance();
+                setTitle(R.string.fragment_songs);
+            } else if (id == R.id.nav_favorites) {
+                fragment = FavoritesFragment.newInstance();
+                setTitle(R.string.fragment_favorites);
+            } else if (id == R.id.nav_logout) {
 
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.content_frame, fragment)
-                    .commit();
-            currentFragment = fragment;
-            setCurrentFragmentAsSearchViewOnQueryTextListener();
+            }
+
+            if (fragment != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .commit();
+                currentFragment = fragment;
+                setCurrentFragmentAsSearchViewOnQueryTextListener();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -171,7 +179,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSongListFragmentInteraction(Song song) {
-
+        Intent intent = new Intent(this, SongActivity.class);
+        intent.putExtra(SongActivity.EXTRA_SONG_ID, song.getId());
+        startActivity(intent);
     }
 
     private void setCurrentFragmentAsSearchViewOnQueryTextListener() {
