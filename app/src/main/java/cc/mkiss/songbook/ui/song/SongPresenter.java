@@ -1,11 +1,14 @@
 package cc.mkiss.songbook.ui.song;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
+import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.interactor.songs.SongsInteractor;
 import cc.mkiss.songbook.interactor.songs.events.GetSongEvent;
 import cc.mkiss.songbook.model.Song;
@@ -34,6 +37,15 @@ public class SongPresenter extends Presenter<SongScreen> {
         eventBus.unregister(this);
     }
 
+    public void handleSongId(final long id) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                interactor.getSong(id);
+            }
+        });
+    }
+
     public void handleEdit(Song song) {
 
     }
@@ -46,6 +58,7 @@ public class SongPresenter extends Presenter<SongScreen> {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(GetSongEvent event) {
         if (screen == null) {
             return;

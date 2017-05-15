@@ -1,5 +1,6 @@
 package cc.mkiss.songbook.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -22,6 +23,7 @@ import cc.mkiss.songbook.R;
 import cc.mkiss.songbook.SongbookApplication;
 import cc.mkiss.songbook.model.Song;
 import cc.mkiss.songbook.ui.favorites.FavoritesFragment;
+import cc.mkiss.songbook.ui.song.SongActivity;
 import cc.mkiss.songbook.ui.songs.OnSongListFragmentInteractionListener;
 import cc.mkiss.songbook.ui.songs.SongsFragment;
 
@@ -171,7 +173,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSongListFragmentInteraction(Song song) {
-
+        Intent intent = new Intent(this, SongActivity.class);
+        intent.putExtra(SongActivity.EXTRA_SONG_ID, song.getId());
+        startActivity(intent);
     }
 
     private void setCurrentFragmentAsSearchViewOnQueryTextListener() {
