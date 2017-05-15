@@ -52,7 +52,7 @@ public class FavoritesPresenter extends Presenter<FavoritesScreen> {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(GetFavoritesEvent event) {
-        if (screen == null) {
+        if (screen == null || event.getSongs() == null) {
             return;
         }
 

@@ -62,7 +62,7 @@ public class SongsPresenter extends Presenter<SongsScreen> {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(GetSongsEvent event) {
-        if (screen == null) {
+        if (screen == null || event.getSongs() == null) {
             return;
         }
 

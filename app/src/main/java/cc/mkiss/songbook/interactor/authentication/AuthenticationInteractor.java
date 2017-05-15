@@ -3,6 +3,7 @@ package cc.mkiss.songbook.interactor.authentication;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -47,8 +48,12 @@ public class AuthenticationInteractor {
     }
 
     private void populateRepository() throws IOException {
-        for (Song song : songApi.getSongs().execute().body()) {
-            repository.addSong(song);
+        try {
+            for (Song song : songApi.getSongs().execute().body()) {
+                repository.addSong(song);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -57,10 +62,17 @@ public class AuthenticationInteractor {
 
         try {
             userApi.logoutUser().execute();
+            purgeRepository();
         } catch (Exception e) {
             event.setThrowable(e);
         }
 
         eventBus.post(event);
+    }
+
+    private void purgeRepository() {
+        for (Song song : repository.getSongs("")) {
+            repository.removeSong(song);
+        }
     }
 }

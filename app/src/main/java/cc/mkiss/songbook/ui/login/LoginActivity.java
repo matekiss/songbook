@@ -55,6 +55,6 @@ public class LoginActivity
 
     @Override
     public void showError(String message) {
-        Snackbar.make(findViewById(R.id.loginLayout), message, Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(findViewById(R.id.loginLayout), message, Snackbar.LENGTH_LONG).show();
     }
 }

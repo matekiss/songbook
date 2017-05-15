@@ -21,27 +21,6 @@ public class MemoryRepository implements Repository {
     @Override
     public void open(Context context) {
         songs = new HashMap<>();
-
-        Song song1 = new Song();
-        song1.setId(getNextSongId());
-        song1.setTitle("Example song 1");
-        song1.setLyrics("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus molestie felis luctus pellentesque varius. Phasellus elit justo, tempus laoreet aliquet ac, imperdiet tristique libero. Sed eu urna sed ligula tempor malesuada at eu tortor. Curabitur posuere sapien sed vestibulum volutpat. Curabitur tempor, est nec mollis venenatis, felis sem sagittis est, a sodales mi est sit amet urna. Integer dolor velit, molestie non lacinia in, aliquet quis metus. Pellentesque aliquet porttitor porttitor.");
-        song1.setFavorite(false);
-        songs.put(song1.getId(), song1);
-
-        Song song2 = new Song();
-        song2.setId(getNextSongId());
-        song2.setTitle("Example song 2");
-        song2.setLyrics("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus molestie felis luctus pellentesque varius. Phasellus elit justo, tempus laoreet aliquet ac, imperdiet tristique libero. Sed eu urna sed ligula tempor malesuada at eu tortor. Curabitur posuere sapien sed vestibulum volutpat. Curabitur tempor, est nec mollis venenatis, felis sem sagittis est, a sodales mi est sit amet urna. Integer dolor velit, molestie non lacinia in, aliquet quis metus. Pellentesque aliquet porttitor porttitor.");
-        song2.setFavorite(true);
-        songs.put(song2.getId(), song2);
-
-        Song song3 = new Song();
-        song3.setId(getNextSongId());
-        song3.setTitle("Example song 3");
-        song3.setLyrics("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus molestie felis luctus pellentesque varius. Phasellus elit justo, tempus laoreet aliquet ac, imperdiet tristique libero. Sed eu urna sed ligula tempor malesuada at eu tortor. Curabitur posuere sapien sed vestibulum volutpat. Curabitur tempor, est nec mollis venenatis, felis sem sagittis est, a sodales mi est sit amet urna. Integer dolor velit, molestie non lacinia in, aliquet quis metus. Pellentesque aliquet porttitor porttitor.");
-        song3.setFavorite(true);
-        songs.put(song3.getId(), song3);
     }
 
     @Override
